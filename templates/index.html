@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Detect if a URL is safe or phishing."/>
+  <meta name="author" content="Garvit Verma, Rahul Singh Parmar , Aryan Panwar , Kartik verm"/>
+  <title>Phishing URL Detector</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../static/styles.css"/>
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      <h1>🔍 URL Phishing Detector</h1>
+      <p class="description">
+      Enter a URL to check whether it's safe to visit or potentially a phishing site. Our AI-based system evaluates the risk and provides a safety rating based on trained machine learning models.
+    </p>
+      <form action="/" method="POST" id="urlForm">
+        <input type="url" name="url" id="urlInput" placeholder="Enter URL (e.g., https://example.com)" required />
+        <button type="submit" class="primary-btn">Check URL</button>
+      </form>
+      <div id="resultSection" class="hidden">
+        <p>Scanned URL: <a href="{{ url }}" id="urlDisplay" target="_blank">{{ url }}</a></p>
+        <h2 id="predictionText"></h2>
+        <div class="button-group">
+          <button class="continue-btn hidden" id="continueSafe" onclick="window.open('{{ url }}', '_blank')">✅ Continue</button>
+          <button class="danger-btn hidden" id="continueUnsafe" onclick="window.open('{{ url }}', '_blank')">⚠️ Still Continue</button>
+        </div>
+      </div>
+    </div>
+    <footer>&copy; 2025 URL Phishing Detector</footer>
+  </div>
+
+  <script>
+    const x = '{{xx}}';
+    const url = '{{url}}';
+    const score = parseFloat(x);
+    const resultSection = document.getElementById('resultSection');
+    const predictionText = document.getElementById('predictionText');
+    const continueSafe = document.getElementById('continueSafe');
+    const continueUnsafe = document.getElementById('continueUnsafe');
+    const urlDisplay = document.getElementById('urlDisplay');
+
+    if (!isNaN(score)) {
+    const percent = (score >= 0.5 ? score : 1 - score) * 100;
+    const message = score >= 0.5
+        ? `✅ Website is ${percent.toFixed(2)}% safe to use.`
+        : `⚠️ Website is ${percent.toFixed(2)}% unsafe to use.`;
+
+    predictionText.textContent = message;
+    resultSection.classList.remove('hidden');
+    urlDisplay.href = url;
+    urlDisplay.textContent = url;
+
+    if (score >= 0.5) {
+        continueSafe.classList.remove('hidden');
+    } else {
+        continueUnsafe.classList.remove('hidden');
+    }
+    } else {
+    // Optional: clear or hide result section if score is invalid
+    resultSection.classList.add('hidden');
+    predictionText.textContent = '';
+    continueSafe.classList.add('hidden');
+    continueUnsafe.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
