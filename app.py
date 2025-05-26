@@ -13,7 +13,6 @@ file = open("pickle/random_forest_model.pkl","rb")
 gbc = pickle.load(file)
 file.close()
 
-
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -36,4 +35,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
