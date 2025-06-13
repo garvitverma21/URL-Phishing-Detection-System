@@ -2,6 +2,8 @@
 
 A complete full‑stack phishing URL detection app with machine learning backend and a user-friendly web GUI built using Flask, HTML, CSS, and JavaScript.
 
+![Image](https://github.com/user-attachments/assets/2f602c63-7d67-4af1-9fca-3de0a8b17fb5)
+
 Live Demo: [https://url-phishing-detection-system-hlxx.onrender.com](https://url-phishing-detection-system-hlxx.onrender.com)
 ---
 
